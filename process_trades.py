@@ -47,8 +47,6 @@ def process_trades(input_file_path):
             setvalues(output, col1, col2, newvalueforvolume, newvaluemaxprice, newtradedprice, weightavgprice, newoccurence, maxtimegap)
 
 
-    # fields = [ 'Symbol', 'MaxTimeGap', 'Volume', 'WeightedAveragePrice','MaxPrice' ]
-
     with open("outputfile/output.csv", "w") as csv_file:
         csvwriter = csv.writer(csv_file, sys.stdout, lineterminator='\n')
         # csvwriter.writerow([ 'Symbol', 'MaxTimeGap', 'Volume', 'WeightedAveragePrice','MaxPrice' ])
@@ -76,6 +74,6 @@ def populate_columns(items, timestamp, symbol, quantity, price, i):
     quantity.append(items[i][2])
     price.append(items[i][3])
 
-filepath = input(" Enter the input file name.\n")
+filepath = input("Enter the input file name.\n")
 process_trades(filepath)
 # process_trades("inputfile/input.csv")

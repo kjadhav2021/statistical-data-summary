@@ -14,7 +14,7 @@ The requirements for the outputs as well as the input file definition are as bel
 Input:
 The input file represents a very simplified stream of trades on an exchange. Each row represents a trade.  This data can be thought of as a time series of values in columns:
 
-<TimeStamp>,<Symbol>,<Quantity>,<Price>
+    <TimeStamp>,<Symbol>,<Quantity>,<Price>
 
 Although the provided input file is small, the solution should be able to handle a source dataset well beyond the amount memory and hard disk space on target machine.
 
@@ -47,7 +47,7 @@ Find the following on a per symbol basis:
 
 Result should be truncated to whole numbers.
 
-   Example: the following trades
+      Example: the following trades
      20 shares of aaa @ 18
      5 shares of aaa @ 7
      Weighted Average Price = ((20 * 18) + (5 * 7)) / (20 + 5) = 15
@@ -57,7 +57,8 @@ Result should be truncated to whole numbers.
 _______________________________________________________________________________
 
 The solution produces a file called 'output.csv' in following format
-<symbol>,<MaxTimeGap>,<Volume>,<WeightedAveragePrice>,<MaxPrice>
+
+    <symbol>,<MaxTimeGap>,<Volume>,<WeightedAveragePrice>,<MaxPrice>
 
 Moreover, The output is sorted by symbol ascending ('aaa' should be first).
 

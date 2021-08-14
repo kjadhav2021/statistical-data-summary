@@ -1,5 +1,7 @@
+#!/usr/bin/python
 import csv
 import sys
+import os
 
 def process_trades(input_file_path):
     input_file = open(input_file_path,"r")
@@ -11,9 +13,11 @@ def process_trades(input_file_path):
 
     for trade_row in csv_reader:
         trades.append(trade_row)
+    print("The .csv file rows copied to trades list.")
 
     for row  in range(0, len(trades)):
         populate_columns(trades, timestamp, symbol, quantity, price, row)
+    print("Populated lists with values from trades list.")
 
     for col1, col2, col3, col4  in zip(symbol,timestamp, quantity, price ):
         # checking output dictionary , if empty then start adding columns into dictionary
@@ -46,6 +50,11 @@ def process_trades(input_file_path):
             # updating the output dictionary values with newvolume,max price,traded price, weighted average price, and max time gap
             setvalues(output, col1, col2, newvalueforvolume, newvaluemaxprice, newtradedprice, weightavgprice, newoccurence, maxtimegap)
 
+    print("The values in output dictionary has been updated successfully.")
+
+    if not os.path.exists("outputfile"):
+        os.makedirs("outputfile") # Create a new outputfile directory because it does not exist
+        print("The new output directory is created successfully.")
 
     with open("outputfile/output.csv", "w") as csv_file:
         csvwriter = csv.writer(csv_file, sys.stdout, lineterminator='\n')
@@ -56,6 +65,8 @@ def process_trades(input_file_path):
                             output[symbol][1]['Volume'], round(output[symbol][4]['WeightedAveragePrice']),
                             output[symbol][2]['MaxPrice']])
         csv_file.close()
+
+    print("The output.csv has been created successfully and copied into outputfile directory. You can verify the output by typing 'cat outputfile/output.csv'.")
 
 
 def setvalues(outputdict, col1, col2, newvolume, newmaxprice, newtradedprice, newweightavgprice, newoccurence, newmaxtimegap):
@@ -74,6 +85,6 @@ def populate_columns(items, timestamp, symbol, quantity, price, i):
     quantity.append(items[i][2])
     price.append(items[i][3])
 
-filepath = input("Enter the input file name.\n")
+filepath = raw_input("Enter the input file name.\n")
 process_trades(filepath)
 # process_trades("inputfile/input.csv")
